@@ -14,8 +14,7 @@ import scala.None
 class CandidateAppSpec extends AnyFlatSpec with should.Matchers {
 
   // TODO use zio-test
-
-  it should "return an UUID" in {
+  "register" should "return an UUID on success" in {
     Unsafe.unsafe { implicit unsafe =>
       val repo = MemCandidateRepo(Ref.unsafe.make(Map.empty[String, Candidate]))
       runWithEnv(ZEnvironment(repo)) {
