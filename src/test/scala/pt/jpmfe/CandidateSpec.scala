@@ -11,7 +11,13 @@ import scala.None
 
 class CandidateSpec extends AnyFlatSpec with should.Matchers {
 
-  "A Candidate's degree" should "be the highest degree of his degrees" in {
+  "instantiating a Candidate" should "fail if the name is blank" in {
+    assertThrows[IllegalArgumentException] {
+      Candidate(name = " ", studies = Set.empty)
+    }
+  }
+
+  "Candidate's degree" should "be the highest degree of his degrees" in {
     val c = Candidate(
       name = "John",
       studies = Set(
