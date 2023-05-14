@@ -6,6 +6,7 @@ import collection.mutable.Stack
 import org.scalatest.*
 import flatspec.*
 import matchers.*
+import pt.jpmfe.util.DateRange
 
 import scala.None
 
@@ -34,5 +35,17 @@ class CandidateSpec extends AnyFlatSpec with should.Matchers {
     val c = Candidate(name = "John", studies = Set.empty)
 
     c.degree should be(None)
+  }
+
+  "associate a skill with a job experience that the Candidate does not have" should "fail" in {
+    val skill = Skill("Backend Development")
+    val job   = JobExperience(
+      role = Role("Soft Eng"),
+      org = Organization("Google"),
+      span = DateRange.from("2022-01-01") to "2023-01-01"
+    )
+    Candidate(name = "John", jobs = Set.empty).addSkill(skill, job) should be(
+      None
+    )
   }
 }
